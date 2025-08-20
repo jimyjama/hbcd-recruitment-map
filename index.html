@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HBCD Recruitment Sites</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    html, body { margin:0; height:100%; }
+    #container { width:100%; height:100vh; }
+  </style>
+  <script src="https://code.highcharts.com/highcharts.js"></script>
+  <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+</head>
+<body>
+  <div id="container"></div>
+  <script>
+(async () => {
+
+    const topology = await fetch(
+        'https://code.highcharts.com/mapdata/countries/us/us-all.topo.json'
+    ).then(response => response.json());
+
+    // Initialize the chart
+    Highcharts.mapChart('container', {
+
+        chart: {
+            map: topology
+        },
+
+        title: {
+            text: ''
+        },
+
+        accessibility: {
+            description: 'Map where city locations have been defined using ' +
+                'latitude/longitude.'
+        },
+
+        mapNavigation: {
+            enabled: true
+        },
+
+        tooltip: {
+            headerFormat: '',
+            pointFormat: '<b>{point.name}</b><br>{point.address}'
+        },
+
+        series: [{
+            // Use the gb-all map with no data as a basemap
+            name: 'United States',
+            borderColor: '#A0A0A0',
+            nullColor: 'rgba(200, 200, 200, 0.3)',
+            showInLegend: false,
+            joinBy:'hc-key',
+            data:[{'hc-key': 'us-al', color:'#d24f7c'},
+                  {'hc-key': 'us-ar', color:'#d24f7c'},
+                  {'hc-key': 'us-ca', color:'#d24f7c'},
+                  {'hc-key': 'us-ga', color:'#d24f7c'},
+                  {'hc-key': 'us-il', color:'#d24f7c'},
+                  {'hc-key': 'us-ma', color:'#d24f7c'},
+                  {'hc-key': 'us-md', color:'#d24f7c'},
+                  {'hc-key': 'us-mn', color:'#d24f7c'},
+                  {'hc-key': 'us-mo', color:'#d24f7c'},
+                  {'hc-key': 'us-nc', color:'#d24f7c'},
+                  {'hc-key': 'us-nm', color:'#d24f7c'},
+                  {'hc-key': 'us-ny', color:'#d24f7c'},
+                  {'hc-key': 'us-oh', color:'#d24f7c'},
+                  {'hc-key': 'us-or', color:'#d24f7c'},
+                  {'hc-key': 'us-pa', color:'#d24f7c'},
+                  {'hc-key': 'us-tn', color:'#d24f7c'},
+                  {'hc-key': 'us-va', color:'#d24f7c'},
+                  {'hc-key': 'us-vt', color:'#d24f7c'},
+                  {'hc-key': 'us-wi', color:'#d24f7c'},
+                 ]
+        }, {
+            name: 'Separators',
+            type: 'mapline',
+            nullColor: '#707070',
+            showInLegend: false,
+            enableMouseTracking: false,
+            accessibility: {
+                enabled: false
+            }
+        }, {
+            // Specify points using lat/lon
+            type: 'mappoint',
+            name: 'Recruitment Sites',
+            accessibility: {
+                point: {
+                    valueDescriptionFormat: '{xDescription}. Lat: ' +
+                        '{point.lat:.2f}, lon: {point.lon:.2f}.'
+                }
+            },
+            color: Highcharts.getOptions().colors[1],
+            dataLabels: {enabled: false},  
+            data: [{
+                name: 'The University of Alabama',
+                lat: 33.20804,
+                lon: -87.5316,
+                address: '850 Peter Bryce Blvd<br>Tuscaloosa, AL 35401'
+            }, {
+                name: 'University of Alabama at Birmingham',
+                lat: 33.5186,
+                lon: -86.8104,
+                address: '1719 6th Avenue S<br>Birmingham, AL 35233'
+            }, {
+                name: 'Arkansas Children’s Research Institute',
+                lat: 34.74794,
+                lon: -92.3191,
+                address: '4224 Shuffield Drive<br>Little Rock, AR 72205'
+            }, {
+                name: 'Children’s Hospital Los Angeles',
+                lat: 34.0979218714128,
+                lon: -118.289919886509,
+                address: '4650 Sunset Blvd<br>Los Angeles, CA 90027'
+            }, {
+                name: 'Cedars-Sinai Medical Center',
+                lat: 34.07632,
+                lon: -118.780568078239,
+                address: '116 N Robertson Blvd #400<br>Los Angeles, CA 90048'
+            }, {
+                name: 'University of California, San Diego',
+                lat: 32.8018,
+                lon: -117.152,
+                address:'7910 Frost St, Suite 370<br>San Diego, CA 92123'
+            }, {
+                name: 'Emory University',
+                lat: 33.82811,
+                lon: -84.3379,
+                address: '12 Executive Park Dr NE<br>Atlanta, GA 30329'
+            }, {
+                name: 'Northwestern University',
+                lat: 41.89359,
+                lon: -87.6237,
+                address: '625 N. Michigan Ave,  Suite 2400<br>Chicago, IL 60611'
+            }, {
+                name: 'Harvard Medical School',
+                lat: 42.33584,
+                lon: -71.1042,
+                address: '25 Shattuck St<br>Boston, MA 02115'
+            }, {
+                name: 'Boston Children’s Hospital',
+                lat: 42.33272,
+                lon: -71.6,
+                address: '2 Brookline Pl<br>Brooline, MA 02445'
+            }, {
+                name: 'University of Maryland, College Park',
+                lat: 38.99444,
+                lon: -76.9313,
+                address: '4716 Pontiac St,  Suites 1102 & 2104<br>College, MD 20740'
+            }, {
+                name: 'Johns Hopkins University and Kennedy Krieger Institute',
+                lat: 39.29901,
+                lon: -76.594,
+                address: '707 N. Broadway<br>Baltimore, MD 21205'
+             }, {
+                name: 'University of Minnesota',
+                lat: 44.9591,
+                lon: -93.2115,
+                address: '2025 E River Pkwy<br>Minneapolis, MN 55414'
+             }, {
+                name: 'Washington University in St. Louis',
+                lat: 38.6375,
+                lon: -90.2573,
+                address: '4444 Forest Park Ave<br>St. Louis, MO 63108'
+             }, {
+                name: 'University of North Carolina at Chapel Hill',
+                lat: 35.90292,
+                lon: -79.0542,
+                address: '125 Mason Farm Road<br>Chapel Hill, NC 27599'
+             }, {
+                name: 'University of New Mexico Health and Health Sciences',
+                lat: 35.09569,
+                lon: -106.622,
+                address: '1101 Yale Blvd NE<br>Albuquerque, NM 87106'
+             }, {
+                name: 'NYU Langone Health',
+                lat: 40.74608,
+                lon: -73.9818,
+                address: '1 Park Avenue<br>New York, NY 10016'
+             }, {
+                name: 'Cincinnati Children’s Hospital Medical Center',
+                lat: 39.14165,
+                lon: -84.5009,
+                address: '3333 Burnet Avenue<br>Cincinnati, OH 45229'
+             }, {
+                name: 'Oklahoma State University Center for Health Sciences',
+                lat: 36.06794,
+                lon: -95.9796,
+                address: '1013 E 66th Pl<br>Tulsa, OK 74136'
+             }, {
+                name: 'Oregon Health & Science University',
+                lat: 45.50023,
+                lon: -122.685,
+                address: '3270 SW Pavilion Loop<br>Portland, OR 97239'
+             }, {
+                name: 'Penn State University',
+                lat: 40.799,
+                lon: -77.8693,
+                address: '379 Moore Building<br>University Park, PA 16802'
+             }, {
+                name: 'Penn State College of Medicine',
+                lat: 40.26482,
+                lon: -76.6741,
+                address: '500 University Drive<br>Hershey, PA 17033'
+             }, {
+                name: 'Children’s Hospital of Philadelphia',
+                lat: 39.9489,
+                lon: -75.1944,
+                address: '3401 Civic Center Blvd<br>Philadelphia, PA 19104'
+             }, {
+                name: 'Vanderbilt University',
+                lat: 36.14044,
+                lon: -86.7957,
+                address: '1400 18th Ave South<br>Nashville, TN 37221'
+             }, {
+                name: 'Virginia Tech',
+                lat: 37.25759,
+                lon: -79.9425,
+                address: '2 Riverside Circle<br>Roanoke, VA 24016'
+             }, {
+                name: 'University of Vermont',
+                lat: 44.48048,
+                lon: -73.2015,
+                address: '1 South Prospect Street Arnold 6<br>Burlington, VT 05401'
+             }, {
+                name: 'University of Wisconsin-Madison',
+                lat: 43.07862,
+                lon: -89.4341,
+                address: '1500 Highland Ave<br>Madison, WI 53705'
+
+            }]
+        }]
+    });
+
+})();
+  </script>
+</body>
+</html>
